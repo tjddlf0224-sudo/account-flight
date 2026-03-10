@@ -253,7 +253,7 @@ canvas{display:block;position:absolute;top:0;left:0;z-index:1}
 // ★ Google Apps Script 웹앱 URL — 배포 후 여기에 붙여넣기
 //   (설정법은 HTML 주석 참고)
 // ════════════════════════════════════════════════════════════
-const SHEET_URL = "YOUR_GOOGLE_APPS_SCRIPT_URL_HERE";
+const SHEET_URL = "https://script.google.com/macros/s/AKfycbwJvAxmuXzgErh4DwQGwk-z_cA7HLz20QZ1OTeQEHYRmOGCJ6_UQ_E4_HaVo2ZBOFvb/exec";
 
 /*
  ★ Google Apps Script 코드 (스프레드시트 → 확장 프로그램 → Apps Script에 붙여넣고 배포):
@@ -770,6 +770,14 @@ const Game={
     return[...map.values()].sort((a,b)=>b.score-a.score).slice(0,15);
   },
 
+  _grade(score){
+    if(score>=10000) return '👑 전설의 에이스';
+    if(score>=6000)  return '🥇 베테랑 파일럿';
+    if(score>=3000)  return '🥈 숙련 파일럿';
+    if(score>=1000)  return '🥉 정규 파일럿';
+    return '🛩 견습 파일럿';
+  },
+
   _render(list){
     const box=document.getElementById('rkbox');
     if(!list||!list.length){
@@ -780,9 +788,10 @@ const Game={
     box.innerHTML='<div class="rkhdr">🏆 HALL OF FAME</div>'+
       list.map((r,i)=>{
         const medal=i===0?'🥇':i===1?'🥈':i===2?'🥉':(i+1)+'위';
+        const grade=r.grade||this._grade(r.score||0);
         return`<div class="rkrow ${r.name===me?'rkme':''}">
           <div class="rkn ${i<3?'top':''}">${medal}</div>
-          <div class="rknm">${r.name}</div>
+          <div class="rknm">${r.name}<span style="font-size:0.7em;opacity:0.65;margin-left:6px;">${grade}</span></div>
           <div class="rksc">${(r.score||0).toLocaleString()}</div>
           <div class="rkdt">${r.date||''}</div>
         </div>`;
