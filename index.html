@@ -707,10 +707,10 @@ const Game={
     document.getElementById('go-hi').textContent=this.hi.toLocaleString();
 
     let grade='🛩 견습 파일럿';
-    if(this.score>=10000)     grade='👑 전설의 에이스';
-    else if(this.score>=6000) grade='🥇 베테랑 파일럿';
-    else if(this.score>=3000) grade='🥈 숙련 파일럿';
-    else if(this.score>=1000) grade='🥉 정규 파일럿';
+    if(this.score>=50000)     grade='👑 전설의 에이스';
+    else if(this.score>=30000) grade='🥇 베테랑 파일럿';
+    else if(this.score>=15000) grade='🥈 숙련 파일럿';
+    else if(this.score>=5000) grade='🥉 정규 파일럿';
     document.getElementById('go-grade').textContent='파일럿 등급: '+grade;
 
     document.getElementById('gs').style.display='flex';
